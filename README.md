@@ -75,7 +75,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Treino de Divisão - 4º Ano</h1>
+        <h1>Treino de Divisão - 3º Ano</h1>
         <button id="generateDivisionButton">Gerar Divisões</button>
 
         <div id="questions" class="question-container"></div>
