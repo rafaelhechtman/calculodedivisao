@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treino de Divisão - 3º Ano</title>
+    <title>Treino de Divisão - 4º Ano</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -75,7 +75,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Treino de Divisão - 3º Ano</h1>
+        <h1>Treino de Divisão - 4º Ano</h1>
         <button id="generateDivisionButton">Gerar Divisões</button>
 
         <div id="questions" class="question-container"></div>
@@ -87,32 +87,66 @@
         const checkAnswersButton = document.getElementById('checkAnswersButton');
         const questionsContainer = document.getElementById('questions');
 
-        function gerarDivisaoFacil() {
-            const divisor = Math.floor(Math.random() * 9) + 2; // Divisores entre 2 e 10
-            const quociente = Math.floor(Math.random() * 10) + 1; // Quocientes entre 1 e 10
-            const dividendo = divisor * quociente;
-
-            return { dividendo, divisor, quociente };
+        function gerarProblemasDeDivisao() {
+            const problemas = [
+                {
+                    problema: "Carlos tem 36 carrinhos de brinquedo e quer dividir igualmente entre seus 6 amigos. Quantos carrinhos cada amigo vai receber?",
+                    dividendo: 36,
+                    divisor: 6,
+                    quociente: 36 / 6
+                },
+                {
+                    problema: "Luiza comprou 45 bolas para brincar e quer dividir igualmente entre seus 9 colegas. Quantas bolas cada colega vai receber?",
+                    dividendo: 45,
+                    divisor: 9,
+                    quociente: 45 / 9
+                },
+                {
+                    problema: "Ana tem 60 chocolates para dar aos seus 4 irmãos. Se ela dividir igualmente entre todos, quantos chocolates cada irmão receberá?",
+                    dividendo: 60,
+                    divisor: 4,
+                    quociente: 60 / 4
+                },
+                {
+                    problema: "Em uma festa, havia 24 lanches para serem divididos igualmente entre 8 crianças. Quantos lanches cada criança irá receber?",
+                    dividendo: 24,
+                    divisor: 8,
+                    quociente: 24 / 8
+                },
+                {
+                    problema: "Uma biblioteca recebeu 72 livros novos e quer distribuir igualmente entre 12 escolas. Quantos livros cada escola receberá?",
+                    dividendo: 72,
+                    divisor: 12,
+                    quociente: 72 / 12
+                },
+                {
+                    problema: "Marcos comprou 50 maçãs para distribuir igualmente entre 10 famílias. Quantas maçãs cada família receberá?",
+                    dividendo: 50,
+                    divisor: 10,
+                    quociente: 50 / 10
+                },
+                {
+                    problema: "Em uma festa, havia 90 doces para serem divididos igualmente entre 15 crianças. Quantos doces cada criança receberá?",
+                    dividendo: 90,
+                    divisor: 15,
+                    quociente: 90 / 15
+                }
+            ];
+            return problemas;
         }
 
-        function criarProblema(dividendo, divisor, quociente, index) {
-            const nomes = ["João", "Maria", "Pedro", "Ana", "Lucas", "Paula", "Carla", "Rafael"];
-            const nome1 = nomes[Math.floor(Math.random() * nomes.length)];
-            const nome2 = nomes[Math.floor(Math.random() * nomes.length)];
-            const numPessoas = divisor;
-            const problema = `${nome1} e ${nome2} têm ${dividendo} doces. Eles querem dividir igualmente entre eles e mais ${numPessoas - 2} amigo(s). Quantos doces cada um receberá?`;
-
+        function criarProblema(problema, index) {
             const container = document.createElement('div');
             container.classList.add('question-container');
 
             const label = document.createElement('label');
-            label.textContent = `Problema ${index + 1}: ${problema}`;
+            label.textContent = `Problema ${index + 1}: ${problema.problema}`;
             container.appendChild(label);
 
             const input = document.createElement('input');
             input.type = 'number';
             input.step = 'any';
-            input.dataset.quociente = quociente;
+            input.dataset.quociente = problema.quociente;
             container.appendChild(input);
 
             questionsContainer.appendChild(container);
@@ -122,10 +156,11 @@
             questionsContainer.innerHTML = '';  // Limpar perguntas anteriores
             checkAnswersButton.style.display = 'block'; // Mostrar botão de conferir respostas
 
-            for (let i = 0; i < 7; i++) {  // Gerar 7 problemas
-                const { dividendo, divisor, quociente } = gerarDivisaoFacil();
-                criarProblema(dividendo, divisor, quociente, i);
-            }
+            const problemas = gerarProblemasDeDivisao();
+
+            problemas.forEach((problema, index) => {
+                criarProblema(problema, index);
+            });
         };
 
         checkAnswersButton.onclick = function () {
@@ -139,7 +174,7 @@
                 const explicacaoDiv = document.createElement('div');
                 explicacaoDiv.classList.add('explanation');
                 explicacaoDiv.innerHTML = `Passo a passo:<br>
-                1. Total de itens: ${quocienteCorreto * input.dataset.divisor}<br>
+                1. Total de itens: ${input.dataset.quociente * input.dataset.divisor}<br>
                 2. Número de pessoas: ${input.dataset.divisor}<br>
                 3. Cada um recebe: ${quocienteCorreto}`;
 
