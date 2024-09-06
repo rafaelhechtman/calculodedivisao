@@ -75,8 +75,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>Treino de Divisão - 3º Ano</h1>
-        <button id="generateDivisionButton">Gerar Divisões</button>
+        <h1>Treino de Divisão - 3º Ano - Esther Edler</h1>
+        <button id="generateDivisionButton">Gerar Questões</button>
 
         <div id="questions" class="question-container"></div>
         <button id="checkAnswersButton" style="display: none;">Conferir Respostas</button>
@@ -87,52 +87,25 @@
         const checkAnswersButton = document.getElementById('checkAnswersButton');
         const questionsContainer = document.getElementById('questions');
 
-        function gerarProblemasDeDivisao() {
-            const problemas = [
-                {
-                    problema: "Carlos tem 36 carrinhos de brinquedo e quer dividir igualmente entre seus 6 amigos. Quantos carrinhos cada amigo vai receber?",
-                    dividendo: 36,
-                    divisor: 6,
-                    quociente: 36 / 6
-                },
-                {
-                    problema: "Luiza comprou 45 bolas para brincar e quer dividir igualmente entre seus 9 colegas. Quantas bolas cada colega vai receber?",
-                    dividendo: 45,
-                    divisor: 9,
-                    quociente: 45 / 9
-                },
-                {
-                    problema: "Ana tem 60 chocolates para dar aos seus 4 irmãos. Se ela dividir igualmente entre todos, quantos chocolates cada irmão receberá?",
-                    dividendo: 60,
-                    divisor: 4,
-                    quociente: 60 / 4
-                },
-                {
-                    problema: "Em uma festa, havia 24 lanches para serem divididos igualmente entre 8 crianças. Quantos lanches cada criança irá receber?",
-                    dividendo: 24,
-                    divisor: 8,
-                    quociente: 24 / 8
-                },
-                {
-                    problema: "Uma biblioteca recebeu 72 livros novos e quer distribuir igualmente entre 12 escolas. Quantos livros cada escola receberá?",
-                    dividendo: 72,
-                    divisor: 12,
-                    quociente: 72 / 12
-                },
-                {
-                    problema: "Marcos comprou 50 maçãs para distribuir igualmente entre 10 famílias. Quantas maçãs cada família receberá?",
-                    dividendo: 50,
-                    divisor: 10,
-                    quociente: 50 / 10
-                },
-                {
-                    problema: "Em uma festa, havia 90 doces para serem divididos igualmente entre 15 crianças. Quantos doces cada criança receberá?",
-                    dividendo: 90,
-                    divisor: 15,
-                    quociente: 90 / 15
-                }
+        function gerarProblemaAleatorio() {
+            const divisores = [2, 3, 4, 5, 6, 7, 8, 9, 10]; // Divisores possíveis
+            const divisor = divisores[Math.floor(Math.random() * divisores.length)];
+            const quociente = Math.floor(Math.random() * 10) + 1; // Quocientes entre 1 e 10
+            const dividendo = divisor * quociente;
+
+            const contextos = [
+                `Carlos tem ${dividendo} carrinhos de brinquedo e quer dividir igualmente entre seus ${divisor} amigos. Quantos carrinhos cada amigo vai receber?`,
+                `Luiza comprou ${dividendo} bolas para brincar e quer dividir igualmente entre seus ${divisor} colegas. Quantas bolas cada colega vai receber?`,
+                `Ana tem ${dividendo} chocolates para dar aos seus ${divisor} irmãos. Se ela dividir igualmente entre todos, quantos chocolates cada irmão receberá?`,
+                `Em uma festa, havia ${dividendo} lanches para serem divididos igualmente entre ${divisor} crianças. Quantos lanches cada criança irá receber?`,
+                `Uma biblioteca recebeu ${dividendo} livros novos e quer distribuir igualmente entre ${divisor} escolas. Quantos livros cada escola receberá?`,
+                `Marcos comprou ${dividendo} maçãs para distribuir igualmente entre ${divisor} famílias. Quantas maçãs cada família receberá?`,
+                `Em uma festa, havia ${dividendo} doces para serem divididos igualmente entre ${divisor} crianças. Quantos doces cada criança receberá?`
             ];
-            return problemas;
+
+            const problema = contextos[Math.floor(Math.random() * contextos.length)];
+
+            return { problema, quociente };
         }
 
         function criarProblema(problema, index) {
@@ -155,12 +128,12 @@
         generateDivisionButton.onclick = function () {
             questionsContainer.innerHTML = '';  // Limpar perguntas anteriores
             checkAnswersButton.style.display = 'block'; // Mostrar botão de conferir respostas
+            checkAnswersButton.disabled = false;
 
-            const problemas = gerarProblemasDeDivisao();
-
-            problemas.forEach((problema, index) => {
-                criarProblema(problema, index);
-            });
+            for (let i = 0; i < 7; i++) {  // Gerar 7 problemas aleatórios
+                const problema = gerarProblemaAleatorio();
+                criarProblema(problema, i);
+            }
         };
 
         checkAnswersButton.onclick = function () {
@@ -174,7 +147,7 @@
                 const explicacaoDiv = document.createElement('div');
                 explicacaoDiv.classList.add('explanation');
                 explicacaoDiv.innerHTML = `Passo a passo:<br>
-                1. Total de itens: ${input.dataset.quociente * input.dataset.divisor}<br>
+                1. Total de itens: ${quocienteCorreto * input.dataset.divisor}<br>
                 2. Número de pessoas: ${input.dataset.divisor}<br>
                 3. Cada um recebe: ${quocienteCorreto}`;
 
