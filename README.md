@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treino de Divisão - 4º Ano</title>
+    <title>Treino de Divisão - 3º Ano</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -75,7 +75,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Treino de Divisão - 4º Ano</h1>
+        <h1>Treino de Divisão - 3º Ano</h1>
         <button id="generateDivisionButton">Gerar Divisões</button>
 
         <div id="questions" class="question-container"></div>
